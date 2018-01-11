@@ -7,6 +7,8 @@
     android:padding="16dp"
     tools:context="com.aros.naufal.qrreader.MainActivity">
 
+    <include layout="@layout/content_main" />
+
     <io.github.yavski.fabspeeddial.FabSpeedDial
         android:id="@+id/fabSpeedDial"
         android:layout_width="wrap_content"
