@@ -1,4 +1,4 @@
-package com.aros.naufal.qrreader.db;
+package com.aros.naufal.qrreader.data.database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -9,8 +9,8 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.aros.naufal.qrreader.db.dao.CardDao;
-import com.aros.naufal.qrreader.db.entity.Card;
+import com.aros.naufal.qrreader.data.database.daos.CardDao;
+import com.aros.naufal.qrreader.data.database.entities.Card;
 
 @Database(entities = {Card.class}, version = 1)
 public abstract class CardRoomDatabase extends RoomDatabase {

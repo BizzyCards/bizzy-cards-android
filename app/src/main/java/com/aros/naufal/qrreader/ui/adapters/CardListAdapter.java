@@ -1,4 +1,4 @@
-package com.aros.naufal.qrreader.ui;
+package com.aros.naufal.qrreader.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.aros.naufal.qrreader.R;
 
-import com.aros.naufal.qrreader.db.entity.Card;
+import com.aros.naufal.qrreader.data.database.entities.Card;
 
 import java.util.List;
 
