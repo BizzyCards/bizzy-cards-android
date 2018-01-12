@@ -100,9 +100,10 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     @Override
     public void handleResult(final Result result) {
         mCardViewModel.instert(new Card(result.getText()));
-        Toast.makeText(MainActivity.this, "Confirmado", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Confirmed", Toast.LENGTH_LONG).show();
         mScannerView.removeAllViews();
         mScannerView.stopCamera();
-        setContentView(R.layout.activity_main);
+        finish();
+        startActivity(getIntent());
     }
 }
