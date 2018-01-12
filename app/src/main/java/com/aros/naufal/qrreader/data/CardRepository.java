@@ -14,6 +14,7 @@ public class CardRepository {
 
     private CardDao mCardDao;
     private LiveData<List<Card>> mAllCards;
+    private LiveData<Card> m1Cards;
 
     public CardRepository(Application application) {
         CardRoomDatabase cardRoomDatabase = CardRoomDatabase.getDatabase(application);
@@ -24,6 +25,7 @@ public class CardRepository {
     public LiveData<List<Card>> getAllCards() {
         return mAllCards;
     }
+
 
     public void insert(Card card) {
         new insertAsyncTask(mCardDao).execute(card);

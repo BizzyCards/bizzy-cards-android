@@ -134,10 +134,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     public void clickBtnGenerateQR(View v) {
         //Intent creation
         Intent intent = new Intent(MainActivity.this, ShowQRActivity.class);
-
+        String ownName=mCardViewModel.getAllCards().getValue().get(0).getName();
         //Pass info through activities
         Bundle b = new Bundle();
-        b.putString("TEXT","Miguel");
+        b.putString("TEXT",ownName);
+
         //Add info
         String cadena = "Miguel";
         intent.putExtras(b);
