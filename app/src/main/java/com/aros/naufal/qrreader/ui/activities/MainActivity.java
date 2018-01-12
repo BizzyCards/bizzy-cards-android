@@ -59,10 +59,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                     setContentView(mScannerView);
                     mScannerView.startCamera();
                 }
-                if (menuItem.getTitle().equals("Profile")) {
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                    return true;
-                }
+
                 if (menuItem.getTitle().equals("Show my QR")) {
                     clickBtnGenerateQR(findViewById(android.R.id.content));
                     return true;
@@ -116,19 +113,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         startActivity(getIntent());
     }
 
-    //Generating QR
     public void clickBtnGenerateQR(View v) {
-        //Intent creation
         Intent intent = new Intent(MainActivity.this, ShowQRActivity.class);
-        String ownName=mCardViewModel.getAllCards().getValue().get(0).getName();
-        //Pass info through activities
         Bundle b = new Bundle();
-        b.putString("TEXT",ownName);
-
-        //Add info
-        String cadena = "Miguel";
+        b.putString("TEXT", "Joaquín Adiego");
         intent.putExtras(b);
-        //Start the new activity
         startActivity(intent);
     }
 }

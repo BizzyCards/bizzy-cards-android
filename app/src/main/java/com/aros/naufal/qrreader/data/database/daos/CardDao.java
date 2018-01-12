@@ -20,6 +20,4 @@ public interface CardDao {
 
     @Query("SELECT * from card_table ORDER BY name ASC")
     LiveData<List<Card>> getAllCards();
-
-
 }

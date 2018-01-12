@@ -17,8 +17,5 @@
         android:id="@+id/imageQRcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <!--:srcCompat="@mipmap/ic_launcher"
-    :layout_editor_absoluteX="152dp"
-    :layout_editor_absoluteY="218dp"-->
 
 </LinearLayout>

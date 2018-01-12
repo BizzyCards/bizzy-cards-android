@@ -14,7 +14,6 @@ public class CardRepository {
 
     private CardDao mCardDao;
     private LiveData<List<Card>> mAllCards;
-    private LiveData<Card> m1Cards;
 
     public CardRepository(Application application) {
         CardRoomDatabase cardRoomDatabase = CardRoomDatabase.getDatabase(application);
