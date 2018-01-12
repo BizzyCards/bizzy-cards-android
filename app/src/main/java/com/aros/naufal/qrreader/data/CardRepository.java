@@ -25,6 +25,7 @@ public class CardRepository {
         return mAllCards;
     }
 
+
     public void insert(Card card) {
         new insertAsyncTask(mCardDao).execute(card);
     }

@@ -20,4 +20,5 @@ public class Card {
     public String getName() {
         return this.name;
     }
+
 }
