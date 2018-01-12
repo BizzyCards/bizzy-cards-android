@@ -31,7 +31,7 @@ public class ShowQRActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         String textToQr = bundle.getString("TEXT");
         //Construimos el mensaje a mostrar
-        txtSend.setText("Hola " + textToQr);
+        //txtSend.setText("Hola " + textToQr);
 
         qrCode = (ImageView)findViewById(R.id.imageQRcode);
         int ancho=getWindowManager().getDefaultDisplay().getWidth();
