@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private ZXingScannerView mScannerView;
     private CardViewModel mCardViewModel;
     private static final String TAG = "MainActivity";
+    private RecyclerView recyclerView;
+    private CardListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        final CardListAdapter adapter = new CardListAdapter(this);
+        recyclerView = findViewById(R.id.recycler_view);
+        adapter = new CardListAdapter(this);
         recyclerView.setAdapter(adapter);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -97,27 +99,57 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(final Result result) {
-        // Do something with the result here
-        System.out.println("RESULT ==>> " + result.getText());
-        Log.d("handler", result.getText()); // Prints scan results
-        Log.d("handler", result.getBarcodeFormat().toString()); // Prints the scan format (qrcode)
-        // show the scanner result into dialog box.
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setNeutralButton("Añadir contacto", new DialogInterface.OnClickListener() {
+        mCardViewModel.instert(new Card(result.getText()));
+        Toast.makeText(MainActivity.this, "Confirmado", Toast.LENGTH_LONG).show();
+        mScannerView.removeAllViews();
+        mScannerView.stopCamera();
+
+        setContentView(R.layout.activity_main);
+
+        mScannerView = new ZXingScannerView(this);
+        mScannerView.setAutoFocus(true);
+
+        FabSpeedDial fabSpeedDial = findViewById(R.id.fabSpeedDial);
+
+        fabSpeedDial.setMenuListener(new FabSpeedDial.MenuListener() {
+
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mCardViewModel.instert(new Card(result.getText()));
-                Toast.makeText(MainActivity.this, "Confirmado", Toast.LENGTH_LONG).show();
+            public boolean onPrepareMenu(NavigationMenu navigationMenu) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                if (menuItem.getTitle().equals("Capture QR")) {
+                    Log.d(TAG, "Capturing QR");
+                    setContentView(mScannerView);
+                    mScannerView.startCamera();
+                }
+
+                Toast.makeText(MainActivity.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public void onMenuClosed() {
+
             }
         });
 
-        builder.setMessage(result.getText());
-        AlertDialog alert1 = builder.create();
+        recyclerView = findViewById(R.id.recycler_view);
+        adapter = new CardListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 
-        alert1.show();
+        mCardViewModel = ViewModelProviders.of(this).get(CardViewModel.class);
 
-        // If you would like to resume scanning, call this method below:
-        mScannerView.resumeCameraPreview(this);
+        mCardViewModel.getAllCards().observe(this, new Observer<List<Card>>() {
+            @Override
+            public void onChanged(@Nullable List<Card> cards) {
+                adapter.setCards(cards);
+            }
+        });
     }
 }
