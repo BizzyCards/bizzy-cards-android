@@ -25,41 +25,10 @@ public abstract class CardRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             CardRoomDatabase.class, "card_database")
-                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
-    }
-
-    private static RoomDatabase.Callback sRoomDatabaseCallback =
-            new RoomDatabase.Callback() {
-
-                @Override
-                public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                    super.onOpen(db);
-                    new PopulateDbAsync(INSTANCE).execute();
-                }
-            };
-
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-
-        private final CardDao mDao;
-
-        PopulateDbAsync(CardRoomDatabase db) {
-            mDao = db.cardDao();
-        }
-
-        @Override
-        protected Void doInBackground(final Void... params) {
-            Log.d("CardRoomDatabase", "Populating database");
-            mDao.deleteAll();
-            Card card = new Card("Naufal Aros");
-            mDao.insert(card);
-            card = new Card("Miguel Rojo");
-            mDao.insert(card);
-            return null;
-        }
     }
 }

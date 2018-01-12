@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private ZXingScannerView mScannerView;
     private CardViewModel mCardViewModel;
     private static final String TAG = "MainActivity";
+    private RecyclerView recyclerView;
+    private CardListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        final CardListAdapter adapter = new CardListAdapter(this);
+        recyclerView = findViewById(R.id.recycler_view);
+        adapter = new CardListAdapter(this);
         recyclerView.setAdapter(adapter);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -97,27 +99,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(final Result result) {
-        // Do something with the result here
-        System.out.println("RESULT ==>> " + result.getText());
-        Log.d("handler", result.getText()); // Prints scan results
-        Log.d("handler", result.getBarcodeFormat().toString()); // Prints the scan format (qrcode)
-        // show the scanner result into dialog box.
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setNeutralButton("Añadir contacto", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mCardViewModel.instert(new Card(result.getText()));
-                Toast.makeText(MainActivity.this, "Confirmado", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        builder.setMessage(result.getText());
-        AlertDialog alert1 = builder.create();
-
-        alert1.show();
-
-        // If you would like to resume scanning, call this method below:
-        mScannerView.resumeCameraPreview(this);
+        mCardViewModel.instert(new Card(result.getText()));
+        Toast.makeText(MainActivity.this, "Confirmed", Toast.LENGTH_LONG).show();
+        mScannerView.removeAllViews();
+        mScannerView.stopCamera();
+        finish();
+        startActivity(getIntent());
     }
 }
