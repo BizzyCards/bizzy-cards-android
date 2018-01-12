@@ -103,53 +103,6 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         Toast.makeText(MainActivity.this, "Confirmado", Toast.LENGTH_LONG).show();
         mScannerView.removeAllViews();
         mScannerView.stopCamera();
-
         setContentView(R.layout.activity_main);
-
-        mScannerView = new ZXingScannerView(this);
-        mScannerView.setAutoFocus(true);
-
-        FabSpeedDial fabSpeedDial = findViewById(R.id.fabSpeedDial);
-
-        fabSpeedDial.setMenuListener(new FabSpeedDial.MenuListener() {
-
-            @Override
-            public boolean onPrepareMenu(NavigationMenu navigationMenu) {
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemSelected(MenuItem menuItem) {
-                if (menuItem.getTitle().equals("Capture QR")) {
-                    Log.d(TAG, "Capturing QR");
-                    setContentView(mScannerView);
-                    mScannerView.startCamera();
-                }
-
-                Toast.makeText(MainActivity.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-
-            @Override
-            public void onMenuClosed() {
-
-            }
-        });
-
-        recyclerView = findViewById(R.id.recycler_view);
-        adapter = new CardListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-
-        mCardViewModel = ViewModelProviders.of(this).get(CardViewModel.class);
-
-        mCardViewModel.getAllCards().observe(this, new Observer<List<Card>>() {
-            @Override
-            public void onChanged(@Nullable List<Card> cards) {
-                adapter.setCards(cards);
-            }
-        });
     }
 }
