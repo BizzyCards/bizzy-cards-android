@@ -1,12 +1,12 @@
-package com.aros.naufal.qrreader;
+package com.aros.naufal.qrreader.data;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.aros.naufal.qrreader.db.CardRoomDatabase;
-import com.aros.naufal.qrreader.db.dao.CardDao;
-import com.aros.naufal.qrreader.db.entity.Card;
+import com.aros.naufal.qrreader.data.database.CardRoomDatabase;
+import com.aros.naufal.qrreader.data.database.daos.CardDao;
+import com.aros.naufal.qrreader.data.database.entities.Card;
 
 import java.util.List;
 

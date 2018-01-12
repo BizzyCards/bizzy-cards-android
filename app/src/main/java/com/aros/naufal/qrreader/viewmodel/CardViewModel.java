@@ -3,10 +3,9 @@ package com.aros.naufal.qrreader.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
 
-import com.aros.naufal.qrreader.CardRepository;
-import com.aros.naufal.qrreader.db.entity.Card;
+import com.aros.naufal.qrreader.data.CardRepository;
+import com.aros.naufal.qrreader.data.database.entities.Card;
 
 import java.util.List;
 

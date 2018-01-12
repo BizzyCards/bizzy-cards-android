@@ -1,7 +1,6 @@
-package com.aros.naufal.qrreader;
+package com.aros.naufal.qrreader.ui.activities;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
@@ -15,8 +14,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.aros.naufal.qrreader.db.entity.Card;
-import com.aros.naufal.qrreader.ui.CardListAdapter;
+import com.aros.naufal.qrreader.R;
+import com.aros.naufal.qrreader.data.database.entities.Card;
+import com.aros.naufal.qrreader.ui.adapters.CardListAdapter;
 import com.aros.naufal.qrreader.viewmodel.CardViewModel;
 import com.google.zxing.Result;
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     }
 
     @Override
-    public void handleResult(Result result) {
+    public void handleResult(final Result result) {
         // Do something with the result here
         System.out.println("RESULT ==>> " + result.getText());
         Log.d("handler", result.getText()); // Prints scan results
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         builder.setNeutralButton("Añadir contacto", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mCardViewModel.instert(new Card(result.getText()));
                 Toast.makeText(MainActivity.this, "Confirmado", Toast.LENGTH_LONG).show();
             }
         });

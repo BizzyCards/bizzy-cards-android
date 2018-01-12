@@ -1,11 +1,11 @@
-package com.aros.naufal.qrreader.db.dao;
+package com.aros.naufal.qrreader.data.database.daos;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.aros.naufal.qrreader.db.entity.Card;
+import com.aros.naufal.qrreader.data.database.entities.Card;
 
 import java.util.List;
 

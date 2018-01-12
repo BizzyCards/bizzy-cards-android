@@ -1,4 +1,4 @@
-package com.aros.naufal.qrreader.db.entity;
+package com.aros.naufal.qrreader.data.database.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
