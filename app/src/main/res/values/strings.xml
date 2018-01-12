@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Bizzy Cards</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="nameTV">Name: </string>
+    <string name="positionTV">Position: </string>
+    <string name="companyTV">Company: </string>
+    <string name="phoneTV">Phone number: </string>
+    <string name="emailTV">Email: </string>
+    <string name="linkedinTV">Linkedin: </string>
+    <string name="twitterTV">Twitter: </string>
+    <string name="websiteTV">Website: </string>
 </resources>

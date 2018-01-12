@@ -2,10 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/edit_profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:iconTint="@android:color/white"
+        android:title="Profile"
+        />
+
+    <item
         android:id="@+id/show_qr"
         android:icon="@drawable/ic_show_qr"
         android:iconTint="@android:color/white"
         android:title="Show my QR"
+       />
         />
 
     <item
@@ -14,5 +22,7 @@
         android:iconTint="@android:color/white"
         android:title="Capture QR"
         />
+
+
 
 </menu>

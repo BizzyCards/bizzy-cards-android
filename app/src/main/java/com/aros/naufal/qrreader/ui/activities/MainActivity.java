@@ -3,6 +3,7 @@ package com.aros.naufal.qrreader.ui.activities;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.internal.NavigationMenu;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.aros.naufal.qrreader.R;
@@ -55,7 +57,14 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                     setContentView(mScannerView);
                     mScannerView.startCamera();
                 }
-
+                if (menuItem.getTitle().equals("Profile")) {
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    return true;
+                }
+                if (menuItem.getTitle().equals("Show my QR")) {
+                    clickBtnGenerateQR(findViewById(android.R.id.content));
+                    return true;
+                }
                 Toast.makeText(MainActivity.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -119,5 +128,19 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
+    }
+
+    //Generating QR
+    public void clickBtnGenerateQR(View v) {
+        //Intent creation
+        Intent intent = new Intent(MainActivity.this, ShowQRActivity.class);
+        //Pass info through activities
+        Bundle b = new Bundle();
+        b.putString("TEXT","Miguel");
+        //Add info
+        String cadena = "Miguel";
+        intent.putExtras(b);
+        //Start the new activity
+        startActivity(intent);
     }
 }
